@@ -42,7 +42,7 @@ func main() {
 
 type response struct {
 	Message string   `json:"message"`
-	//EnvVars []string `json:"env"`
+	EnvVars []string `json:"env"`
 	Fib     []int    `json:"fib"`
 }
 
