@@ -15,7 +15,7 @@ func main() {
 
 		f := fib()
 
-		res := &response{Message: "Hello Just testing the deployment"}
+		res := &response{AssigmentforKubernetes: "Hello This is deployment to eks kubernetes Clusters!!!"}
 
 		for _, e := range os.Environ() {
 			pair := strings.Split(e, "=")
@@ -42,7 +42,7 @@ func main() {
 
 type response struct {
 	Message string   `json:"message"`
-	EnvVars []string `json:"env"`
+	//EnvVars []string `json:"env"`
 	Fib     []int    `json:"fib"`
 }
 
