@@ -1,36 +1,36 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-k7s
+  name: hello-k8s
 spec:
   type: LoadBalancer
   ports:
     - port: 80
       targetPort: 8080
   selector:
-    app: hello-k7s
+    app: hello-k8s
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-k7s
+  name: hello-k8s
 spec:
   replicas: 5
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 3
-      maxSurge: 4
+      maxSurge: 3
   selector:
     matchLabels:
-      app: hello-k7s
+      app: hello-k8s
   template:
     metadata:
       labels:
-        app: hello-k7s
+        app: hello-k8s
     spec:
       containers:
-        - name: hello-k7s
+        - name: hello-k8s
           image: CONTAINER_IMAGE
           securityContext:
             privileged: false
@@ -38,4 +38,29 @@ spec:
             allowPrivilegeEscalation: false
           ports:
             - containerPort: 8080
-
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: standard
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+mountOptions:
+  - debug
+volumeBindingMode: Immediate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cassandra
+  name: cassandra
+spec:
+  clusterIP: None
+  ports:
+  - port: 9042
+  selector:
+    app: cassandra

@@ -1,9 +1,10 @@
 # eks-workshop-sample-api-service-go
 
-A sample Kubernetes service used in the [EKS Workshop](https://eksworkshop.com/) CI/CD Pipeline module.
+This is a sample Kubernetes service used for the CI/CD pipeline Assignment adapted from the [EKS Workshop](https://eksworkshop.com/) CI/CD Pipeline module.
 
-The Dockerfile is a [multi-stage](https://docs.docker.com/develop/develop-images/multistage-build/) build that
-compiles the Go application and then packages it in a minimal image that pulls from [scratch](https://hub.docker.com/_/scratch/).
+![alt text](https://mk-new-configbucket.s3.amazonaws.com/assignment/templates/main/Assignmentdiagram.jpg)
+
+A Dockerfile is a [multi-stage](https://docs.docker.com/develop/develop-images/multistage-build/) build that compiles the Go application and then packages it in a minimal image that pulls from [scratch](https://hub.docker.com/_/scratch/).
 The size of this Docker image is ~ 3.2 MiB.
 
 The buildspec.yml file is used by the [AWS CodeBuild](https://aws.amazon.com/codebuild/) stage. In this file, it pulls down
